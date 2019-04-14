@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "GeekWisdom.org Chrome Extension",
+  "version": "0.1",
+  "content_scripts": [
+  {
+    "matches": [
+        "https://www.google.ca/*",         	        	"http://www.google.com/*",
+        "https://www.google.com/*",
+        "https://www.google.com/*"
+    ],
+    "js": ["content.js"]
+  }
+]
+}
