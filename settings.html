@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head><title>My Test Extension Options</title></head>
+<body>
+
+<table border=0>
+
+<tr>
+<td>
+Decoder Color:
+</td>
+<td>
+<select id="color">
+ <option value="red">red</option>
+ <option value="green">green</option>
+ <option value="blue">blue</option>
+ <option value="yellow">yellow</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Message Center:
+</td>
+<td>
+  <input type="textbox" id="MessageCenter" length=100 value="https://geekwisdom.org/utils/messagecenter.php"></input>
+</td>
+</tr>
+
+
+<tr>
+<td>
+Frequency:
+</td>
+<td>
+  <input type="textbox" id="Frequency" length=100 value="93.1"></input>
+</td>
+</tr>
+
+<tr>
+<td>
+Encryption Key:
+</td>
+<td>
+  <input type="textbox" id="enc_key" length=100 value="secret.password"></input>
+</td>
+</tr>
+</table>
+
+<div id="status"></div>
+<button id="save">Save</button>
+
+<script src="options.js"></script>
+</body>
+</html>
