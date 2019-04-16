@@ -1,43 +1,52 @@
-/*
-====================================================================================================================================================
- .----------------.  .----------------.  .----------------.  .----------------.                                         
-| .--------------. || .--------------. || .--------------. || .--------------. |                                        
-| |    ______    | || |  _________   | || |  _________   | || |  ___  ____   | |                                        
-| |  .' ___  |   | || | |_   ___  |  | || | |_   ___  |  | || | |_  ||_  _|  | |                                        
-| | / .'   \_|   | || |   | |_  \_|  | || |   | |_  \_|  | || |   | |_/ /    | |                                        
-| | | |    ____  | || |   |  _|  _   | || |   |  _|  _   | || |   |  __'.    | |                                        
-| | \ `.___]  _| | || |  _| |___/ |  | || |  _| |___/ |  | || |  _| |  \ \_  | |                                        
-| |  `._____.'   | || | |_________|  | || | |_________|  | || | |____||____| | |                                        
-| |              | || |              | || |              | || |              | |                                        
-| '--------------' || '--------------' || '--------------' || '--------------' |                                        
- '----------------'  '----------------'  '----------------'  '----------------'                                         
- .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
-| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
-| | _____  _____ | || |     _____    | || |    _______   | || |  ________    | || |     ____     | || | ____    ____ | |
-| ||_   _||_   _|| || |    |_   _|   | || |   /  ___  |  | || | |_   ___ `.  | || |   .'    `.   | || ||_   \  /   _|| |
-| |  | | /\ | |  | || |      | |     | || |  |  (__ \_|  | || |   | |   `. \ | || |  /  .--.  \  | || |  |   \/   |  | |
-| |  | |/  \| |  | || |      | |     | || |   '.___`-.   | || |   | |    | | | || |  | |    | |  | || |  | |\  /| |  | |
-| |  |   /\   |  | || |     _| |_    | || |  |`\____) |  | || |  _| |___.' / | || |  \  `--'  /  | || | _| |_\/_| |_ | |
-| |  |__/  \__|  | || |    |_____|   | || |  |_______.'  | || | |________.'  | || |   `.____.'   | || ||_____||_____|| |
-| |              | || |              | || |              | || |              | || |              | || |              | |
-| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
- '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' 
-
-http://patorjk.com/software/taag/#p=display&h=0&v=0&f=Blocks&t=Geek%0AWisdom
-
-Really !, you want to cheat and look at the code ?
-
-Really ???
-
-#GeekWisdom
-=====================================================================================================================================================
-*/
-
+<html>
+<head>
+<title>Secret Decoder Ring - GeekWisdom.org</title>
+<script>
+//take from chrome extension settings
 var key="secret password"; 
 var frequency="93.1"; 
 var sitename="geekwisdom.org"; //take this from site name (full url?)
 var messagecenter="geekwisdom.org/utils/messagecenter.php";
+//if no password make password site name (non full url)
+</script>
+<style id="GeekWisdom.org">
+    main {display:none !important;}
+</style>
 
+<style>
+
+div {
+    cursor:crosshair;
+}
+
+
+.gw_decoder
+{
+visibility: hidden;
+}
+
+.gw_decoded
+{
+
+font-family:"Courier New", Courier, monospace;
+display: block;
+}
+
+
+</style> 
+</head>
+<body>
+<div id="noscript">
+Javascript is disabled? image here
+</div>
+<main>
+<div id="testme"></div>
+<button onclick="createInputDiv();">Test Me</button>
+</main>
+
+</body>
+
+<script>
 function hexEncode(text)
 {
     var hex, i;
@@ -211,7 +220,7 @@ m.parentNode.style.display="none";
 var text=strip(newTrim(m.value));
 var enc_msg=xorConvert(text,key);
 var stationid=xorConvert(sitename,frequency);
-var msg_src="https://" + messagecenter + "?action=add&stationid=" + stationid + "&msg="+enc_msg;
+var msg_src="http://" + messagecenter + "?action=add&stationid=" + stationid + "&msg="+enc_msg;
 //tempaory only later send message write out <script src=+
 var t=document.getElementById("testme");
 t.textContent=msg_src;
@@ -290,10 +299,11 @@ function newTrim(x) {
  return tmp3;
 }
 
+</script>
+<script>
 
 function loadSecrets(secretDataJSON)
 {
-alert (secretDataJSON);
 var secretData=JSON.parse(secretDataJSON);
 for (i=0;i<secretData.length;i++)
  {
@@ -332,7 +342,41 @@ el.style.display="block";
 }
 
 
-
+function createDiv2(theid,text,x,y)
+{
+var div = document.createElement("div");
+div.id=theid
+div.style.position = "absolute";
+div.style.left=x + "px";
+div.style.top=y + "px";
+div.style.width = "5px";
+div.style.height = "5px";
+div.style.background = "red";
+div.style.color = "white";
+div.style.display = "block;"
+div.textContent=text;
+div.addEventListener("click", showmsg);
+document.body.appendChild(div);
+return div;
+}
 var my_awesome_script = document.createElement('script');
-my_awesome_script.setAttribute('src','https://geekwisdom.org/utils/messagecenter.php');
+my_awesome_script.setAttribute('src','http://geekwisdom.org/utils/messagecenter.php');
 document.head.appendChild(my_awesome_script);
+
+function release_page()
+{
+    if (self === top) {
+        var noscript = document.getElementById("noscript");
+        noscript.parentNode.removeChild(noscript); 
+       var antiClickjack = document.getElementById("GeekWisdom.org");
+        antiClickjack.parentNode.removeChild(antiClickjack);
+    } else {
+        top.location = self.location;
+    }
+
+}
+document.onload = new function() { release_page();}
+
+
+</script>
+</html>
