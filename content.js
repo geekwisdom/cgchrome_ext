@@ -81,6 +81,7 @@ function decode_it(el)
 {
 el.removeAttribute("onclick");
 var text2=el.textContent;
+alert (text2);
 var d=hexDecode(text2);
 var enc=xorConvert(d,key);
 var final=hexDecode(enc);
@@ -293,7 +294,8 @@ function newTrim(x) {
 
 function loadSecrets(secretDataJSON)
 {
-alert (secretDataJSON);
+
+
 var secretData=JSON.parse(secretDataJSON);
 for (i=0;i<secretData.length;i++)
  {
@@ -304,6 +306,7 @@ for (i=0;i<secretData.length;i++)
   var msg=d["message"];
   var el=createDiv("secret"+i,msg,x,y);
  }
+pre_launch();
 }
 
 function showCoords(event) {
@@ -315,13 +318,30 @@ function showCoords(event) {
   var coords2 = "screen - X: " + sX + ", Y coords: " + sY;
 //alert (coords1 + " " + coords2);
 
-var msg=createDiv("mytest","Hello world");
 msg.style.display="block";
 msg.style.position = "absolute";
 msg.style.left=cX + "px";
 msg.style.top=cY + "px";
 }
 
+function createDiv2(theid,text,x,y)
+{
+
+var div = document.createElement("div");
+div.id=theid
+div.style.position = "absolute";
+div.style.left=x + "px";
+div.style.top=y + "px";
+div.style.width = "100px";
+div.style.height = "100px";
+div.style.background = "red";
+div.style.color = "white";
+div.style.display = "block;"
+div.textContent=text;
+div.addEventListener("click", showmsg);
+document.body.appendChild(div);
+return div;
+}
 
 function showmsg()
 {
@@ -333,6 +353,24 @@ el.style.display="block";
 
 
 
-var my_awesome_script = document.createElement('script');
-my_awesome_script.setAttribute('src','https://geekwisdom.org/utils/messagecenter.php');
-document.head.appendChild(my_awesome_script);
+function get_settings(items)
+{
+key=items.encKey;
+frequency=items.Frequency;
+chrome.runtime.sendMessage(
+    {contentScriptQuery: 'fetchMessages',
+     id: '1'},loadSecrets);
+
+}
+
+
+var style = document.createElement('style');
+var textNode = document.createTextNode('.gw_decoder { visibility: hidden; } .gw_decoded { font-family:"Courier New", Courier, monospace; display: block; }');
+style.appendChild(textNode);
+document.head.appendChild(style);
+
+
+chrome.runtime.sendMessage(
+    {contentScriptQuery: 'loadSettings',
+     id: '1'},get_settings);
+

@@ -12,6 +12,9 @@
 	  "https://*/"
         ],
 "icons": { "128": "gw128.png" },
+"background": {
+  "scripts": ["background.js"]
+},
   "content_scripts": [
   {
     "matches": [
